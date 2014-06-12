@@ -7,5 +7,7 @@ aWindow.cache = {
   $document: $(document),
   $html: $(document.documentElement),
   $body: $(document.body),
-  $title: $('title')
+  $title: $('title'),
+  $h1: $('h1'),
+  $dynamicContainer: $('#dynamicContainer')
 };

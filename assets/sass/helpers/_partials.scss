@@ -41,4 +41,24 @@
     position: relative;
 }
 
+// button styles
+%button {
+    padding: 0.75em 1em;
+    border: 1px solid $color-border-dark;
+    text-decoration: none;
+    color: $button-color;
+    background-color: $button-background;
+
+    &:hover {
+        text-decoration: none;
+        color: $button-color-hover;
+        background-color: $button-background-hover;
+    }
+
+    &:active {
+        color: $button-color-active;
+        background-color: $button-background-active;
+    }
+}
+
 /* /partials */

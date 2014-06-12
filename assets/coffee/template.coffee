@@ -1,13 +1,26 @@
 aWindow = aWindow or {}
 
-aWindow.template =
+aWindow.template = do ->
+  'use strict'
 
-  primary: _.template $('#primaryTemplate').html()
+  init = (callback) ->
+    request = $.ajax
+      url: '/assets/templates/templates.html',
+      dataType: 'html',
 
-  contactPartial: _.template $('#contactPartial').html()
+    request.done (data) ->
+      processTemplates data, callback
 
-  homepageDisplayPartial: _.template $('#homepageDisplayPartial').html()
+    # uh-oh, something went wrong
+    request.fail (data) ->
+      processTemplates do aWindow.dummyData().template, callback
 
-  metaListPartial: _.template $('#metaListPartial').html()
+  processTemplates = (response, callback) ->
+    $templates = $(response).filter('script[type="text/html"]')
 
-do $('script[type="text/html"]').remove
+    $templates.each ->
+      aWindow.template[$(this).attr 'id'] = _.template $(this).html()
+
+    do callback
+
+  init: init

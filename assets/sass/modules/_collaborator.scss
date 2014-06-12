@@ -1,0 +1,20 @@
+// meta list styles
+.collaborator-container {
+  @extend .clearfix;
+
+  .primary-media {
+    float: left;
+    margin-right: 30px;
+    min-width: 380px;
+  }
+
+  .sidebar-text {
+    max-height: 480px;
+    overflow-y: scroll;
+  }
+
+  .collaborator-name,
+  .description {
+    display: inline;
+  }
+}
