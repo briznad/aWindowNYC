@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>a w i n d o w | 301</title>
+
+        <meta charset="utf-8">
+        <meta name="description" content="This resource does not exist as a distinct document. Kindly return home.">
+
+        <script>
+            // the current page does not exist as a distinct document
+            // however, it might exist as a location within a single-page-application
+            // pass the user back to the root, but assign the current pathname as a hash, so we can test that route
+            location.replace('/#' + location.pathname.replace(/\/$/, ''));
+        </script>
+    </head>
+    <body></body>
+</html>

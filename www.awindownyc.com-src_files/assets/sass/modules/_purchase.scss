@@ -1,0 +1,70 @@
+.overlay-title {
+  margin: 0;
+}
+
+.production-run {
+
+}
+
+.purchase-price {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.purchase-details {
+  margin-bottom: 1em;
+}
+
+.made-to-order {
+
+}
+
+.time-to-ship {
+
+}
+
+.order-link,
+.more-info-link,
+.choose-design-btn {
+  display: inline-block;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  padding: 1em 1.25em 0.9em;
+  border: 1px solid #777;
+  font-size: 0.9em;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: #777;
+  color: $color-white;
+
+  &:hover {
+    text-decoration: none;
+    background-color: $color-black;
+    border-color: $color-black;
+  }
+
+  &:active {
+    background-color: $color-white;
+    color: inherit;
+  }
+}
+
+.choose-design-btn {
+  margin-top: 0.5em;
+}
+
+.learn-more-link,
+.choose-design-link,
+.back-to-parent-link {
+  display: block;
+  margin-bottom: 0.4em;
+  text-decoration: underline;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.back-to-parent-link {
+  text-transform: lowercase;
+}

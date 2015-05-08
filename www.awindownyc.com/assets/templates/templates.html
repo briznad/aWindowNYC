@@ -1,0 +1,877 @@
+<!-- primary template -->
+<script type="text/html" id='primaryTemplate'>
+    <nav class="top-row">
+        <a class="logo" href="/">
+            <img src="/assets/images/aWindow_logo.svg" alt="aWindowNYC logo" />
+        </a>
+
+        <ul class="top-nav-list">
+            <li class="top-nav-list-item projects">
+                <a href="/projects">projects</a>
+            </li>
+            <li class="top-nav-list-item events">
+                <a href="/events">events</a>
+            </li>
+            <li class="top-nav-list-item shop">
+                <a href="/shop">shop</a>
+            </li>
+            <li class="top-nav-list-item editions">
+                <a href="/editions">editions</a>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="middle-row">
+        <% if (currentType === 'meta') {
+            switch (currentTitleNormalized) {
+                case 'root':
+                    print(aWindow.template.homepagePartial({
+                        data:           data,
+                        currentEdition: currentEdition
+                    }));
+                    break;
+                case 'editions':
+                    print(aWindow.template.metaListPartial({
+                        data            : data,
+                        metaList        : 'edition',
+                        displayOrder    : data.meta[currentTitleNormalized].displayOrder,
+                        gridColumns     : 3
+                    }));
+                    break;
+                case 'collaborators':
+                    print(aWindow.template.metaListPartial({
+                        data            : data,
+                        metaList        : 'collaborator',
+                        displayOrder    : data.meta[currentTitleNormalized].displayOrder,
+                        gridColumns     : 3
+                    }));
+                    break;
+                case 'events':
+                    print(aWindow.template.metaListPartial({
+                        data            : data,
+                        metaList        : 'event',
+                        displayOrder    : data.meta[currentTitleNormalized].displayOrder,
+                        gridColumns     : 3
+                    }));
+                    break;
+                case 'projects':
+                    print(aWindow.template.metaListPartial({
+                        data            : data,
+                        metaList        : 'project',
+                        displayOrder    : data.meta[currentTitleNormalized].displayOrder,
+                        gridColumns     : 3
+                    }));
+                    break;
+                case 'shop':
+                case 'items':
+                    print(aWindow.template.metaListPartial({
+                        data            : data,
+                        metaList        : 'item',
+                        displayOrder    : data.meta[currentTitleNormalized].displayOrder,
+                        gridColumns     : 3
+                    }));
+                    break;
+                case 'contact':
+                    print(aWindow.template.contactPartial({
+                        data:           data,
+                        currentPage:    currentPage,
+                        currentEdition: currentEdition,
+                        contactData:    contactData
+                    }));
+                    break;
+                case 'edition-one-parallax':
+                    print(aWindow.template.editionOneParallaxPartial({
+                        data:           data,
+                        currentPage:    currentPage,
+                        currentEdition: currentEdition,
+                        contactData:    contactData
+                    }));
+                    break;
+                case 'where':
+                    print(aWindow.template.fullWidthImagePartial({
+                        data:                   data,
+                        currentPage:            currentPage,
+                        currentType:            currentType,
+                        currentTitleNormalized: currentTitleNormalized,
+                        currentEdition:         currentEdition,
+                        fullWidthMedia:         data.edition[currentEdition].location.media,
+                        overlayPartial:         'whereSidebarPartial',
+                        attribution:            false
+                    }));
+                    break;
+                case 'about':
+                    print(aWindow.template.collaboratorAboutPartial({
+                        data:                   data,
+                        currentPage:            currentPage,
+                        currentType:            currentType,
+                        currentTitleNormalized: currentTitleNormalized,
+                        attribution:            currentPage.media.attribution
+                    }));
+                    break;
+                case 'terms':
+                    print(aWindow.template.termsPartial({
+                        data:           data,
+                        currentEdition: currentEdition
+                    }));
+                    break;
+            }
+        } else if (currentType === 'collaborator') {
+            print(aWindow.template.collaboratorAboutPartial({
+                data:                   data,
+                currentPage:            currentPage,
+                currentType:            currentType,
+                currentTitleNormalized: currentTitleNormalized,
+                attribution:            currentPage.media.attribution
+            }));
+        } else if (currentType === 'item' || currentType === 'sub-item') {
+            print(aWindow.template.fullWidthImagePartial({
+                data:                   data,
+                currentPage:            currentPage,
+                fullWidthMedia:         currentPage.purchasePageMedia.source,
+                attribution:            currentPage.purchasePageMedia.attribution,
+                currentEdition:         currentEdition,
+                overlayPartial:         'purchaseSidebarPartial',
+                currentType:            currentType,
+                currentTitleNormalized: currentTitleNormalized
+            }));
+        } else {
+            print(aWindow.template.itemEditionPartial({
+                data:                   data,
+                currentType:            currentType,
+                currentTitleNormalized: currentTitleNormalized,
+                currentPage:            currentPage,
+                attribution:            currentPage.media.attribution
+            }));
+        }%>
+    </main>
+
+    <footer class="bottom-row">
+        <nav class="footer-nav">
+            <ul>
+                <li class="footer-nav-item">
+                    <a href="/editions">editions</a>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="/collaborators">collaborators</a>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="/about">about</a>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="/contact">contact</a>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="http://a-windownyc.tumblr.com/" target="_blank">blog</a>
+                </li>
+                <li class="footer-nav-item">
+                    <a href="/terms">terms</a>
+                </li>
+                <li class="footer-nav-item social-links">
+                    <ul>
+                        <li class="social-link-item">
+                            <a class="social-link instagram" href="http://instagram.com/awindownyc" target="_blank"><span class="visually-hidden">navigate to aWindow on Instagram</span></a>
+                        </li>
+                        <li class="social-link-item">
+                            <a class="social-link facebook" href="http://facebook.com/awindownyc" target="_blank"><span class="visually-hidden">navigate to aWindow on Facebook</span></a>
+                        </li>
+                        <li class="social-link-item">
+                            <a class="social-link twitter" href="http://twitter.com/awindownyc" target="_blank"><span class="visually-hidden">navigate to aWindow on Twitter</span></a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="footer-nav-item newsletter">
+                    <form class="newsletter-form" action="/contact" method="post" target="_blank">
+                        <input name="typeOfContact" type="hidden" value="Subscribe to Newsletter" />
+                        <label for="newsletterEmail">newsletter</label>
+                        <input id="newsletterEmail" name="newsletterEmail" type="email" placeholder="hi@example.com" required />
+                        <input type="submit" value="subscribe" />
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </footer>
+</script>
+<!-- /primary template -->
+
+
+<!-- main row partials -->
+<script type="text/html" id='homepagePartial'>
+    <div class="homepage-container">
+        <section class="homepage-module-edition">
+            <a class="homepage-module-link" href="/edition-one-parallax">
+                <figure style="background-image: url(/assets/images/final-jpgs-edition-one/awindow-photoshoot-low-res.jpg);">
+                    <figcaption>
+                        <h2 class="hompeage-module-title">Edition One</h2>
+                    </figcaption>
+                </figure>
+            </a>
+        </section>
+        <section class="homepage-module-project">
+            <a class="homepage-module-link" href="/project/shop-cooper-hewitt">
+                <figure style="background-image: url(/assets/images/events-projects/shop-cooper-hewitt/awindow-shop-ch-web.jpg);">
+                    <figcaption>
+                        <h2 class="hompeage-module-title">Shop Cooper Hewitt</h2>
+                    </figcaption>
+                </figure>
+            </a>
+        </section>
+    </div>
+</script>
+
+<script type="text/html" id='fullWidthImagePartial'>
+    <div class="full-width-image-container" style="background-image: url(<%= fullWidthMedia %>);">
+        <div class="overlay-container">
+            <%
+                print(aWindow.template[overlayPartial]({
+                    data:                   data,
+                    currentPage:            currentPage,
+                    currentEdition:         currentEdition,
+                    currentType:            currentType,
+                    currentTitleNormalized: currentTitleNormalized
+                }));
+            %>
+        </div>
+        <% if (attribution) print(aWindow.template.attributionPartial({ attribution: attribution })); %>
+    </div>
+</script>
+
+<script type="text/html" id='itemEditionPartial'>
+    <div class="item-edition-container">
+        <section class="sidebar-text">
+            <p class="description"><%= currentPage.description %></p>
+        </section>
+        <figure class="primary-media">
+            <% if (currentPage.media.type === 'video-embed') {
+                print(currentPage.media.source);
+            } else { %>
+                <a href="<%= currentPage.media.source %>" target="_blank">
+                    <img class="primary-image" src="<%= currentPage.media.source %>" alt="view larger image" />
+                </a>
+            <% } %>
+
+            <% if (attribution) print(aWindow.template.attributionPartial({ attribution: attribution })); %>
+        </figure>
+        <% if (currentType === 'item' && currentPage['sub-items'].length) {
+            // show sub-item list partial
+            print(aWindow.template.subItemDisplayPartial({
+                subItems:               data['sub-item'],
+                currentSubItems:        currentPage['sub-items'],
+                parentItemNormalized:   currentTitleNormalized
+            }));
+        } else if (currentPage.additionalMedia) { %>
+            <div class="additional-media-wrapper">
+                <section class="additional-media">
+                    <% _.each(currentPage.additionalMedia, function(value) { %>
+                        <a class="thumbnail-image" href="<%= value %>" style="background-image: url(<%= value %>);" target="_blank">
+                            <span class="visually-hidden">view larger image</span>
+                        </a>
+                    <% }); %>
+                </section>
+            </div>
+        <% } %>
+    </div>
+</script>
+
+<script type="text/html" id='subItemDisplayPartial'>
+    <%
+        // display main image and subsequent smaller carousel images that link to respective sub-item pages
+    %>
+    <div class="additional-media-wrapper">
+        <section class="additional-media">
+            <% _.each(currentSubItems, function(value) { %>
+                <a class="thumbnail-image sub-item" href="/item/<%= parentItemNormalized %>/<%= value %>/purchase" style="background-image: url(<%= subItems[value].media.source %>);">
+                    <span class="visually-hidden">go to purchase page</span>
+                </a>
+            <% }); %>
+        </section>
+    </div>
+</script>
+
+<script type="text/html" id='collaboratorAboutPartial'>
+    <div class="collaborator-about-container">
+        <figure class="primary-media">
+            <% if (currentPage.media.type === 'video-embed') {
+                print(currentPage.media.source);
+            } else { %>
+                <img class="primary-image" src="<%= currentPage.media.source %>" alt="<%= currentPage.title %>">
+            <% } %>
+
+            <% if (attribution) print(aWindow.template.attributionPartial({ attribution: attribution })); %>
+        </figure>
+        <section class="sidebar-text">
+            <p class="description"><%= currentPage.description %></p>
+
+            <%
+                // if current collaborator has items, show them
+            %>
+            <% if (currentType === 'collaborator' && currentPage.items.length) {
+                print(aWindow.template.metaListPartial({
+                    data            : data,
+                    metaList        : 'item',
+                    displayOrder    : currentPage.items,
+                    gridColumns     : 2
+                }));
+            } %>
+        </section>
+    </div>
+</script>
+
+<script type="text/html" id='metaListPartial'>
+    <div class="meta-list-container">
+        <% var gridClass = (gridColumns === 2) ? 'two-by' : 'three-by'; %>
+        <ul class="meta-list <%= gridClass %>">
+            <% _.each(displayOrder, function(value) {
+                var currentItem = metaList !== 'item' ? data[metaList][value] : data[data.item[value] ? 'item' : 'sub-item'][value];
+            %>
+                <li class="meta-list-item">
+                    <a
+                        class="meta-list-link <%= metaList %>"
+
+                        <% if (currentItem.parentItem) { %>
+                            href="/<%= metaList %>/<%= currentItem.parentItem %>/<%= value %>"
+                        <% } else { %>
+                            href="/<%= metaList %>/<%= value %>"
+                        <% } %>
+
+                        <% if (metaList === 'item') { %>
+                            style="background-image: url(<%= currentItem.purchasePageMedia.source %>);"
+                        <% } else { %>
+                            style="background-image: url(<%= currentItem.media.source %>);"
+                        <% } %>
+                    >
+                        <div class="meta-list-overlay">
+                            <h2 class="meta-list-title"><%= currentItem.title %></h2>
+
+                            <% if (metaList === 'item') { %>
+                                <div class="purchase-price"><%= currentItem.price %></div>
+                            <% } %>
+                        </div>
+                    </a>
+                </li>
+            <% }); %>
+       </ul>
+    </div>
+</script>
+
+<script type="text/html" id="contactPartial">
+    <div class="contact-container">
+        <aside class="meta-info-container">
+            <section class="meta-section">
+                <h2 class="section-header">awindow studio</h2>
+                <p>488 Morgan Ave<br>Brooklyn, NY 11222<br><a href="mailto:info@awindownyc.com">info@awindownyc.com</a></p>
+            </section>
+        </aside>
+        <form action="/contact" method="post" target="_blank">
+            <input name="typeOfContact" type="hidden" value="Contact Form Message" />
+            <div class="form-container">
+                <label for="contactName">
+                    Name*
+                    <input id="contactName" name="name" type="text" required autofocus />
+                </label>
+                <label for="contactEmail">
+                    Email*
+                    <input id="contactEmail" name="_replyto" type="email" required />
+                </label>
+                <label for="contactPhone">
+                    Phone
+                    <input id="contactPhone" name="phone" type="tel" />
+                </label>
+
+                <% if (contactData) { %>
+                    <label for="contactSubject">
+                        Subject
+                        <input id="contactSubject" name="subject" type="text" value="more info about <%= decodeURIComponent(contactData.title) %>" />
+                    </label>
+                <% } %>
+
+                <label for="contactMessage">
+                    Message*
+                    <textarea id="contactMessage" name="message" rows="10" required></textarea>
+                </label>
+                <label>
+                    Contact Me By
+                    <span class="radio-wrapper">
+                        <label for="preferEmail"><input id="preferEmail" name="contactPreference" type="radio" value="email" />Email</label>
+                        <label for="preferPhone"><input id="preferPhone" name="contactPreference" type="radio" value="phone" />Phone</label>
+                    </span>
+                </label>
+                <input type="submit" value="Send">
+            </div>
+        </form>
+    </div>
+</script>
+<!-- /main row partials -->
+
+
+<!-- where sidebar partials -->
+<script type="text/html" id='whereSidebarPartial'>
+    <h2 class="overlay-title">Where Are We Now</h2>
+    <p class="where-description"><%= data.edition[currentEdition].location.description %></p>
+    <% if (data.edition[currentEdition].location.address !== '') { %>
+        <a class="directions-link" href="https://maps.google.com/maps?daddr=<% print(data.edition[currentEdition].location.address.replace(/\s/g, '+')); %>" target="_blank">Get Directions</a>
+    <% } %>
+</script>
+<!-- /where sidebar partials -->
+
+
+<!-- purchase sidebar partials -->
+<script type="text/html" id='purchaseSidebarPartial'>
+    <h2 class="overlay-title"><%= currentPage.title %></h2>
+
+    <% if (currentPage.productionRun) { %>
+        <div class="production-run"><%= currentPage.productionRun %></div>
+    <% } %>
+
+    <div class="designer-link">designed by <a href="/collaborator/<%= currentPage.creator %>"><%= data.collaborator[currentPage.creator].title %></a></div>
+
+    <div class="purchase-price"><%= currentPage.price %></div>
+
+    <% if (currentPage.purchaseDetails) { %>
+        <div class="purchase-details"><%= currentPage.purchaseDetails %></div>
+    <% } %>
+
+    <% if (currentPage.madeToOrder) { %>
+        <div class="made-to-order">made to order</div>
+    <% } %>
+
+    <% if (currentPage.timeToShip) { %>
+        <div class="time-to-ship">please allow <%= currentPage.timeToShip %></div>
+    <% } %>
+
+    <%
+        // gallery is a semi-protected word. if a title starts with "gallery" this denotes that the item offered is the entire edition gallery/display
+    %>
+    <% if (currentPage.galleryItem) { %>
+        <a href="/contact?title=<%= encodeURIComponent(currentPage.title) %>" class="more-info-link">request more info</a>
+    <% } else if (currentPage['sub-items'] && currentPage['sub-items'].length) { %>
+        <a href="javascript:void(0)" class="choose-design-btn">choose design</a>
+    <% } else { %>
+        <a href="javascript:void(0)" class="order-link">add to cart</a>
+    <% } %>
+
+    <a href="javascript:void(0)" class="learn-more-link">learn more</a>
+
+    <% if (currentPage.parentItem) { %>
+        <a href="javascript:void(0)" class="choose-design-link">see alternate designs</a>
+        <a href="/item/<%= currentPage.parentItem %>" class="back-to-parent-link">back to <%= data.item[currentPage.parentItem].title %></a>
+    <% } %>
+</script>
+<!-- /purchase sidebar partials -->
+
+
+<!-- lightbox module -->
+<script type="text/html" id='lightboxModule'>
+    <div class="lightbox-overlay">
+        <figure class="lightbox-container">
+            <img class="lightbox-img" src="<%= imgSource %>" alt=""/>
+            <a class="lightbox-close" href="#"><span class="visually-hidden">close fullscreen image</span></a>
+        </figure>
+    </div>
+</script>
+<!-- /lightbox module -->
+
+<!-- modal module -->
+<script type="text/html" id='modalModule'>
+    <div class="modal-overlay <%= additionalClasses %>" id="<%= modalID %>">
+        <section class="modal-container">
+            <div class="modal-content"><%= modalContent %></div>
+
+            <% if (showCloseBtn) { %>
+                <a class="modal-close" href="javascript:void(0)"><span class="visually-hidden">close modal</span></a>
+            <% } %>
+        </section>
+    </div>
+</script>
+<!-- /modal module -->
+
+<!-- learn more modal module -->
+<script type="text/html" id='learnMoreModule'>
+    <section class="sidebar-text">
+        <p class="description"><%= currentPage.description %></p>
+    </section>
+    <figure class="primary-media">
+        <% if (currentPage.media.type === 'video-embed') {
+            print(currentPage.media.source);
+        } else { %>
+            <a href="<%= currentPage.media.source %>" target="_blank">
+                <img class="primary-image" src="<%= currentPage.media.source %>" alt="view larger image" />
+            </a>
+        <% } %>
+
+        <% if (attribution) print(aWindow.template.attributionPartial({ attribution: attribution })); %>
+    </figure>
+</script>
+<!-- /learn more modal module -->
+
+<!-- choose design modal module -->
+<script type="text/html" id='chooseDesignModule'>
+    <h2 class="choose-design-title">choose design</h2>
+    <ul class="choose-design-list">
+        <% _.each(currentPage['sub-items'], function(value) {
+            if (value !== currentSubItem) {
+                var subItem = data['sub-item'][value];
+        %>
+            <li class="choose-design-list-item">
+                <a href="/item/<%= currentTitleNormalized %>/<%= value %>" class="sub-item-link" title="<%= subItem.title %>">
+                    <figure class="sub-item-img" style="background-image: url(<%= subItem.media.source %>);">
+                        <figcaption class="sub-item-title"><%= subItem.title %></figcaption>
+                    </figure>
+                </a>
+            </li>
+        <% }}); %>
+    </ul>
+</script>
+<!-- /choose design modal module -->
+
+<!-- media attribution partial -->
+<script type="text/html" id='attributionPartial'>
+    <% if (attribution && attribution.link) { %>
+        <a class="media-attribution" href="<%= attribution.link %>" target="_blank">media by <%= attribution.title %></a>
+    <% } else if (attribution && attribution.title) { %>
+        <span class="media-attribution">media by <%= attribution.title %></span>
+    <% } %>
+</script>
+<!-- /media attribution partial -->
+
+<!-- edition one parallax partial -->
+<script type="text/html" id='editionOneParallaxPartial'>
+    <figure id="parallax" class="parallax-container">
+        <div class="layer" data-depth="0.10">
+            <img src="/assets/images/editionone/homepage_parallax/base_by_brad.jpg">
+        </div>
+        <div class="layer image-layer skull" data-depth="0.20">
+            <img class="image" src="/assets/images/editionone/homepage_parallax/skull.png">
+        </div>
+        <div class="layer image-layer ekleipsis" data-depth="0.28">
+            <img class="image" src="/assets/images/editionone/homepage_parallax/eclipses.png">
+        </div>
+        <div class="layer image-layer double-tongue" data-depth="0.30">
+            <img class="image" src="/assets/images/editionone/homepage_parallax/tongue.png">
+        </div>
+        <div class="layer image-layer conker" data-depth="0.38">
+            <img class="image" src="/assets/images/editionone/homepage_parallax/conker.png">
+        </div>
+        <div class="layer image-layer square" data-depth="0.50">
+            <img class="image" src="/assets/images/editionone/homepage_parallax/square.png">
+        </div>
+        <div class="layer image-layer core" data-depth="0.53">
+            <img class="image" src="/assets/images/editionone/homepage_parallax/core.png">
+        </div>
+        <div class="layer image-layer t-shirt" data-depth="0.50">
+            <img class="image" src="/assets/images/editionone/homepage_parallax/t-shirt.png">
+        </div>
+        <a class="layer link-layer gallery" href="/item/gallery-edition-one" data-depth="0.10"><span class="visually-hidden">navigate to gallery info page</span></a>
+        <a class="layer link-layer skull" href="/item/skull" data-depth="0.20"><span class="visually-hidden">navigate to skull info page</span></a>
+        <a class="layer link-layer double-tongue" href="/item/double-tongue" data-depth="0.30"><span class="visually-hidden">navigate to double tongue info page</span></a>
+        <a class="layer link-layer t-shirt" href="/item/t-shirt" data-depth="0.53"><span class="visually-hidden">navigate to t-shirt info page</span></a>
+        <a class="layer link-layer ekleipsis" href="/item/ekleipsis" data-depth="0.28"><span class="visually-hidden">navigate to ekleipsis info page</span></a>
+        <a class="layer link-layer square" href="/item/square" data-depth="0.50"><span class="visually-hidden">navigate to square info page</span></a>
+        <a class="layer link-layer core" href="/item/core" data-depth="0.53"><span class="visually-hidden">navigate to core info page</span></a>
+        <a class="layer link-layer conker conker-1" href="/item/conker" data-depth="0.38"><span class="visually-hidden">navigate to conker info page</span></a>
+        <a class="layer link-layer conker conker-2" href="/item/conker" data-depth="0.38"><span class="visually-hidden">navigate to conker info page</span></a>
+    </figure>
+</script>
+<!-- /edition one parallax partial -->
+
+
+
+
+
+
+
+
+
+<!-- terms template -->
+<script type="text/html" id="termsPartial">
+    <div class="terms-container">
+        <h2>TERMS & CONDITIONS</h2>
+
+        <h3>TABLE OF CONTENTS</h3>
+        <ul class="table-of-contents">
+            <li>
+                <a href="#SRP">SHIPPING AND RETURN POLICY</a>
+                <ul>
+                    <li><a href="#SRP_Returns">Returns</a></li>
+                    <li><a href="#SRP_Refunds">Refunds</a></li>
+                    <li><a href="#SRP_Late_Or_Missing_Refunds">Late Or Missing Refunds</a></li>
+                    <li><a href="#SRP_Exchanges">Exchanges</a></li>
+                    <li><a href="#SRP_Shipping">Shipping</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#PP">PRIVACY POLICY</a>
+                <ul>
+                    <li><a href="#PP_What_Do_We_Do_With_Your_Information">What Do We Do With Your Information?</a></li>
+                    <li><a href="#PP_Consent">Consent</a></li>
+                    <li><a href="#PP_Disclosure">Disclosure</a></li>
+                    <li><a href="#PP_Payment">Payment</a></li>
+                    <li><a href="#PP_Security">Security</a></li>
+                    <li><a href="#PP_Age_Of_Consent">Age Of Consent</a></li>
+                    <li><a href="#PP_Changes_To_This_Privacy_Policy">Changes To This Privacy Policy</a></li>
+                    <li><a href="#PP_Questions_And_Contact_Information">Questions And Contact Information</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#TOS">TERMS OF SERVICE</a>
+                <ul>
+                    <li><a href="#TOS_Overview">Overview</a></li>
+                    <li><a href="#TOS_Online_Store_Terms">Online Store Terms</a></li>
+                    <li><a href="#TOS_General_Conditions">General Conditions</a></li>
+                    <li><a href="#TOS_Accuracy_Completeness_And_Timeliness_Of_Information">Accuracy, Completeness And Timeliness Of Information</a></li>
+                    <li><a href="#TOS_Modifications_To_The_Service_And_Prices">Modifications To The Service And Prices</a></li>
+                    <li><a href="#TOS_Products_Or_Services">Products Or Services</a></li>
+                    <li><a href="#TOS_Accuracy_Of_Billing_And_Account_Information">Accuracy Of Billing And Account Information</a></li>
+                    <li><a href="#TOS_Optional_Tools">Optional Tools</a></li>
+                    <li><a href="#TOS_Third-party_Links">Third-party Links</a></li>
+                    <li><a href="#TOS_User_Comments_Feedback_And_Other_Submissions">User Comments, Feedback And Other Submissions</a></li>
+                    <li><a href="#TOS_Personal_Information">Personal Information</a></li>
+                    <li><a href="#TOS_Errors_Inaccuracies_And_Omissions">Errors, Inaccuracies And Omissions</a></li>
+                    <li><a href="#TOS_Prohibited_Uses">Prohibited Uses</a></li>
+                    <li><a href="#TOS_Disclaimer_Of_Warranties_Limitation_Of_Liability">Disclaimer Of Warranties; Limitation Of Liability</a></li>
+                    <li><a href="#TOS_Indemnification">Indemnification</a></li>
+                    <li><a href="#TOS_Severability">Severability</a></li>
+                    <li><a href="#TOS_Termination">Termination</a></li>
+                    <li><a href="#TOS_Entire_Agreement">Entire Agreement</a></li>
+                    <li><a href="#TOS_Governing_Law">Governing Law</a></li>
+                    <li><a href="#TOS_Changes_To_Terms_Of_Service">Changes To Terms Of Service</a></li>
+                    <li><a href="#TOS_Contact_Information">Contact Information</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <dl>
+            <dt id="SRP"><h3>SHIPPING AND RETURN POLICY</h3></dt>
+            <dd>
+                <p>In line with our philosophy, we want to make sure that the purchasing and post-purchasing experience meets the highest standards you would expect. So please don’t hesitate to contact us at any time at <a href="mailto:info@awindownyc.com">info@awindownyc.com</a> and we will be delighted to resolve any concerns.</p>
+
+                <dl>
+                    <dt id="SRP_Returns"><h4>Returns</h4></dt>
+                    <dd>
+                        <p>Our policy lasts 30 days. If 30 days have gone by since your purchase, unfortunately we can’t offer you a refund or exchange. To be eligible for a return, your item must be unused and in the same condition that you received it. It must also be in the original packaging.</p>
+                    </dd>
+
+                    <dt id="SRP_Refunds"><h4>Refunds</h4></dt>
+                    <dd>
+                        <p>Once your return is received and inspected, we will send you an email to notify you that we have received your returned item. We will also notify you of the approval or rejection of your refund.</p>
+                        <p>If you are approved, then your refund will be processed, and a credit will automatically be applied to your credit card or original method of payment, within a certain amount of days.</p>
+                    </dd>
+
+                    <dt id="SRP_Late_Or_Missing_Refunds"><h4>Late Or Missing Refunds</h4></dt>
+                    <dd>
+                        <p>If you haven’t received a refund yet, first check your bank account again. Then contact your credit card company, it may take some time before your refund is officially posted. Next contact your bank. There is often some processing time before a refund is posted.</p>
+                        <p>If you’ve done all of this and you still have not received your refund yet, please contact us at <a href="mailto:info@awindownyc.com">info@awindownyc.com</a> and we will ensure this is done.</p>
+                    </dd>
+
+                    <dt id="SRP_Exchanges"><h4>Exchanges</h4></dt>
+                    <dd>
+                        <p>If you need to exchange it for the same item, we will include a return label for your convenience. Please send us an email at <a href="mailto:info@awindownyc.com">info@awindownyc.com</a> and we will contact you immediately to address your concerns. Depending on where you live, the time it may take for your exchanged product to reach you, may vary.</p>
+                    </dd>
+
+                    <dt id="SRP_Shipping"><h4>Shipping</h4></dt>
+                    <dd>
+                        <p>All shipping costs are included in the listed price and will cover any order within the United States.</p>
+                        <p>To return your product, we will include a return label for your convenience. You should mail your product to:</p>
+                        <p>aWindow<br>488 Morgan Avenue<br>Brooklyn NY<br>USA 11222</p>
+                    </dd>
+                </dl>
+            </dd>
+
+
+            <dt id="PP"><h3>PRIVACY POLICY</h3></dt>
+            <dd>
+                <dl>
+                    <dt id="PP_What_Do_We_Do_With_Your_Information"><h4>What Do We Do With Your Information?</h4></dt>
+                    <dd>
+                        <p>When you purchase something from our store, as part of the buying and selling process, we collect the personal information you give us such as your name, address and email address.
+                        When you browse our store, we also automatically receive your computer’s internet protocol (IP) address in order to provide us with information that helps us learn about your browser and operating system.</p>
+                        <p>With your permission, we may send you emails about our store, new products and other updates.</p>
+                    </dd>
+
+                    <dt id="PP_Consent"><h4>Consent</h4></dt>
+                    <dd>
+                        <p>How do you get my consent?</p>
+                        <p>When you provide us with personal information to complete a transaction, verify your credit card, place an order, arrange for a delivery or return a purchase, we imply that you consent to our collecting it and using it for that specific reason only. If we ask for your personal information for a secondary reason, like marketing, we will either ask you directly for your expressed consent, or provide you with an opportunity to say no.</p>
+                        <p>How do I withdraw my consent?</p>
+                        <p>If after you opt-in, you change your mind, you may withdraw your consent for us to contact you, for the continued collection, use or disclosure of your information, at any time, by contacting us at <a href="mailto:info@awindownyc.com">info@awindownyc.com</a> or mailing us at:</p>
+                        <p>aWindow<br>488 Morgan Avenue<br>Brooklyn NY<br>USA 11222</p>
+                    </dd>
+
+                    <dt id="PP_Disclosure"><h4>Disclosure</h4></dt>
+                    <dd>
+                        <p>We may disclose your personal information if we are required by law to do so or if you violate our Terms of Service.</p>
+                    </dd>
+
+                    <dt id="PP_Payment"><h4>Payment</h4></dt>
+                    <dd>
+                        <p>All transfers conducted through awindow  are handled and transacted through third party dedicated gateways to guarantee your protection. Card information is not stored and all card information is handled over SSL encryption. Please read the terms & conditions for the payment gateway chosen for the transaction as they are responsible for the transactions made.</p>
+                        <p>It is encrypted through the Payment Card Industry Data Security Standard (PCI-DSS). Your purchase transaction data is stored only as long as is necessary to complete your purchase transaction. After that is complete, your purchase transaction information is deleted.</p>
+                        <p>All direct payment gateways adhere to the standards set by PCI-DSS as managed by the PCI Security Standards Council, which is a joint effort of brands like Visa, MasterCard, American Express and Discover.</p>
+                    </dd>
+
+                    <dt id="PP_Security"><h4>Security</h4></dt>
+                    <dd>
+                        <p>To protect your personal information, we take reasonable precautions and follow industry best practices to make sure it is not inappropriately lost, misused, accessed, disclosed, altered or destroyed.</p>
+                    </dd>
+
+                    <dt id="PP_Age_Of_Consent"><h4>Age Of Consent</h4></dt>
+                    <dd>
+                        <p>By using this site, you represent that you are at least the age of majority in your state or province of residence, or that you are the age of majority in your state or province of residence and you have given us your consent to allow any of your minor dependents to use this site.</p>
+                    </dd>
+
+                    <dt id="PP_Changes_To_This_Privacy_Policy"><h4>Changes To This Privacy Policy</h4></dt>
+                    <dd>
+                        <p>We reserve the right to modify this privacy policy at any time, so please review it frequently. Changes and clarifications will take effect immediately upon their posting on the website. If we make material changes to this policy, we will notify you here that it has been updated, so that you are aware of what information we collect, how we use it, and under what circumstances, if any, we use and/or disclose it.</p>
+                    </dd>
+
+                    <dt id="PP_Questions_And_Contact_Information"><h4>Questions And Contact Information</h4></dt>
+                    <dd>
+                        <p>If you would like to: access, correct, amend or delete any personal information we have about you, register a complaint, or simply want more information contact - <a href="mailto:info@awindownyc.com">info@awindownyc.com</a> or by mail at:</p>
+                        <p>aWindow<br>488 Morgan Avenue<br>Brooklyn NY<br>USA 11222</p>
+                    </dd>
+                </dl>
+            </dd>
+
+
+            <dt id="TOS"><h3>TERMS OF SERVICE</h3></dt>
+            <dd>
+                <dl>
+                    <dt id="TOS_Overview"><h4>Overview</h4></dt>
+                    <dd>
+                        <p>This website is operated by awindow. Throughout the site, the terms “we”, “us” and “our” refer to awindow. awindow offers this website, including all information, tools and services available from this site to you, the user, conditioned upon your acceptance of all terms, conditions, policies and notices stated here.</p>
+                        <p>By visiting our site and/ or purchasing something from us, you engage in our “Service” and agree to be bound by the following terms and conditions (“Terms of Service”, “Terms”), including those additional terms and conditions and policies referenced herein and/or available by hyperlink. These Terms of Service apply  to all users of the site, including without limitation users who are browsers, vendors, customers, merchants, and/ or contributors of content.</p>
+                        <p>Please read these Terms of Service carefully before accessing or using our website. By accessing or using any part of the site, you agree to be bound by these Terms of Service. If you do not agree to all the terms and conditions of this agreement, then you may not access the website or use any services. If these Terms of Service are considered an offer, acceptance is expressly limited to these Terms of Service.</p>
+                        <p>Any new features or tools which are added to the current store shall also be subject to the Terms of Service. You can review the most current version of the Terms of Service at any time on this page. We reserve the right to update, change or replace any part of these Terms of Service by posting updates and/or changes to our website. It is your responsibility to check this page periodically for changes. Your continued use of or access to the website following the posting of any changes constitutes acceptance of those changes.</p>
+                    </dd>
+
+                    <dt id="TOS_Online_Store_Terms"><h4>Online Store Terms</h4></dt>
+                    <dd>
+                        <p>By agreeing to these Terms of Service, you represent that you are at least the age of majority in your state or province of residence, or that you are the age of majority in your state or province of residence and you have given us your consent to allow any of your minor dependents to use this site.</p>
+                        <p>You may not use our products for any illegal or unauthorized purpose nor may you, in the use of the Service, violate any laws in your jurisdiction (including but not limited to copyright laws).</p>
+                        <p>You must not transmit any worms or viruses or any code of a destructive nature.</p>
+                        <p>A breach or violation of any of the Terms will result in an immediate termination of your Services.</p>
+                    </dd>
+
+                    <dt id="TOS_General_Conditions"><h4>General Conditions</h4></dt>
+                    <dd>
+                        <p>We reserve the right to refuse service to anyone for any reason at any time.</p>
+                        <p>You understand that your content (not including credit card information), may be transferred unencrypted and involve (a) transmissions over various networks; and (b) changes to conform and adapt to technical requirements of connecting networks or devices. Credit card information is always encrypted during transfer over networks.</p>
+                        <p>You agree not to reproduce, duplicate, copy, sell, resell or exploit any portion of the Service, use of the Service, or access to the Service or any contact on the website through which the service is provided, without express written permission by us.</p>
+                        <p>The headings used in this agreement are included for convenience only and will not limit or otherwise affect these Terms.</p>
+                    </dd>
+
+                    <dt id="TOS_Accuracy_Completeness_And_Timeliness_Of_Information"><h4>Accuracy, Completeness And Timeliness Of Information</h4></dt>
+                    <dd>
+                        <p>We are not responsible if information made available on this site is not accurate, complete or current. The material on this site is provided for general information only and should not be relied upon or used as the sole basis for making decisions without consulting primary, more accurate, more complete or more timely sources of information. Any reliance on the material on this site is at your own risk.</p>
+                        <p>This site may contain certain historical information. Historical information, necessarily, is not current and is provided for your reference only. We reserve the right to modify the contents of this site at any time, but we have no obligation to update any information on our site. You agree that it is your responsibility to monitor changes to our site.</p>
+                    </dd>
+
+                    <dt id="TOS_Modifications_To_The_Service_And_Prices"><h4>Modifications To The Service And Prices</h4></dt>
+                    <dd>
+                        <p>Prices for our products are subject to change without notice. We reserve the right at any time to modify or discontinue the Service (or any part or content thereof) without notice at any time. We shall not be liable to you or to any third-party for any modification, price change, suspension or discontinuance of the Service.</p>
+                    </dd>
+
+                    <dt id="TOS_Products_Or_Services"><h4>Products Or Services</h4></dt>
+                    <dd>
+                        <p>Certain products or services may be available exclusively online through the website. These products or services may have limited quantities and are subject to return or exchange only according to our Return Policy.</p>
+                        <p>We have made every effort to display as accurately as possible the colors and images of our products that appear at the store. We cannot guarantee that your computer monitor's display of any color will be accurate.</p>
+                        <p>We reserve the right, but are not obligated, to limit the sales of our products or Services to any person, geographic region or jurisdiction. We may exercise this right on a case-by-case basis. We reserve the right to limit the quantities of any products or services that we offer. All descriptions of products or product pricing are subject to change at anytime without notice, at the sole discretion of us. We reserve the right to discontinue any product at any time. Any offer for any product or service made on this site is void where prohibited.</p>
+                    </dd>
+
+                    <dt id="TOS_Accuracy_Of_Billing_And_Account_Information"><h4>Accuracy Of Billing And Account Information</h4></dt>
+                    <dd>
+                        <p>We reserve the right to refuse any order you place with us. We may, in our sole discretion, limit or cancel quantities purchased per person, per household or per order. These restrictions may include orders placed by or under the same customer account, the same credit card, and/or orders that use the same billing and/or shipping address. In the event that we make a change to or cancel an order, we may attempt to notify you by contacting the e-mail and/or billing address/phone number provided at the time the order was made. We reserve the right to limit or prohibit orders that, in our sole judgment, appear to be placed by dealers, resellers or distributors.</p>
+                        <p>You agree to provide current, complete and accurate purchase and account information for all purchases made at our store. You agree to promptly update your account and other information, including your email address and credit card numbers and expiration dates, so that we can complete your transactions and contact you as needed.</p>
+                        <p>For more detail, please review our Returns Policy.</p>
+                    </dd>
+
+                    <dt id="TOS_Optional_Tools"><h4>Optional Tools</h4></dt>
+                    <dd>
+                        <p>We may provide you with access to third-party tools over which we neither monitor nor have any control nor input.</p>
+                        <p>You acknowledge and agree that we provide access to such tools ”as is” and “as available” without any warranties, representations or conditions of any kind and without any endorsement. We shall have no liability whatsoever arising from or relating to your use of optional third-party tools.</p>
+                        <p>Any use by you of optional tools offered through the site is entirely at your own risk and discretion and you should ensure that you are familiar with and approve of the terms on which tools are provided by the relevant third-party provider(s).</p>
+                        <p>We may also, in the future, offer new services and/or features through the website (including, the release of new tools and resources). Such new features and/or services shall also be subject to these Terms of Service.</p>
+                    </dd>
+
+                    <dt id="TOS_Third-party_Links"><h4>Third-party Links</h4></dt>
+                    <dd>
+                        <p>Certain content, products and services available via our Service may include materials from third-parties.</p>
+                        <p>Third-party links on this site may direct you to third-party websites that are not affiliated with us. We are not responsible for examining or evaluating the content or accuracy and we do not warrant and will not have any liability or responsibility for any third-party materials or websites, or for any other materials, products, or services of third-parties.</p>
+                        <p>We are not liable for any harm or damages related to the purchase or use of goods, services, resources, content, or any other transactions made in connection with any third-party websites. Please review carefully the third-party's policies and practices and make sure you understand them before you engage in any transaction. Complaints, claims, concerns, or questions regarding third-party products should be directed to the third-party.</p>
+                    </dd>
+
+                    <dt id="TOS_User_Comments_Feedback_And_Other_Submissions"><h4>User Comments, Feedback And Other Submissions</h4></dt>
+                    <dd>
+                        <p>If, at our request, you send certain specific submissions (for example contest entries) or without a request from us you send creative ideas, suggestions, proposals, plans, or other materials, whether online, by email, by postal mail, or otherwise (collectively, 'comments'), you agree that we may, at any time, without restriction, edit, copy, publish, distribute, translate and otherwise use in any medium any comments that you forward to us. We are and shall be under no obligation (1) to maintain any comments in confidence; (2) to pay compensation for any comments; or (3) to respond to any comments.</p>
+                        <p>We may, but have no obligation to, monitor, edit or remove content that we determine in our sole discretion are unlawful, offensive, threatening, libelous, defamatory, pornographic, obscene or otherwise objectionable or violates any party’s intellectual property or these Terms of Service.</p>
+                        <p>You agree that your comments will not violate any right of any third-party, including copyright, trademark, privacy, personality or other personal or proprietary right. You further agree that your comments will not contain libelous or otherwise unlawful, abusive or obscene material, or contain any computer virus or other malware that could in any way affect the operation of the Service or any related website. You may not use a false e-mail address, pretend to be someone other than yourself, or otherwise mislead us or third-parties as to the origin of any comments. You are solely responsible for any comments you make and their accuracy. We take no responsibility and assume no liability for any comments posted by you or any third-party.</p>
+                    </dd>
+
+                    <dt id="TOS_Personal_Information"><h4>Personal Information</h4></dt>
+                    <dd>
+                        <p>Your submission of personal information through the store is governed by our <a href="#PP">Privacy Policy</a>.</p>
+                    </dd>
+
+                    <dt id="TOS_Errors_Inaccuracies_And_Omissions"><h4>Errors, Inaccuracies And Omissions</h4></dt>
+                    <dd>
+                        <p>Occasionally there may be information on our site or in the Service that contains typographical errors, inaccuracies or omissions that may relate to product descriptions, pricing, promotions, offers, product shipping charges, transit times and availability. We reserve the right to correct any errors, inaccuracies or omissions, and to change or update information or cancel orders if any information in the Service or on any related website is inaccurate at any time without prior notice (including after you have submitted your order).</p>
+                        <p>We undertake no obligation to update, amend or clarify information in the Service or on any related website, including without limitation, pricing information, except as required by law. No specified update or refresh date applied in the Service or on any related website, should be taken to indicate that all information in the Service or on any related website has been modified or updated.</p>
+                    </dd>
+
+                    <dt id="TOS_Prohibited_Uses"><h4>Prohibited Uses</h4></dt>
+                    <dd>
+                        <p>In addition to other prohibitions as set forth in the Terms of Service, you are prohibited from using the site or its content: (a) for any unlawful purpose; (b) to solicit others to perform or participate in any unlawful acts; (c) to violate any international, federal, provincial or state regulations, rules, laws, or local ordinances; (d) to infringe upon or violate our intellectual property rights or the intellectual property rights of others; (e) to harass, abuse, insult, harm, defame, slander, disparage, intimidate, or discriminate based on gender, sexual orientation, religion, ethnicity, race, age, national origin, or disability; (f) to submit false or misleading information; (g) to upload or transmit viruses or any other type of malicious code that will or may be used in any way that will affect the functionality or operation of the Service or of any related website, other websites, or the Internet; (h) to collect or track the personal information of others; (i) to spam, phish, pharm, pretext, spider, crawl, or scrape; (j) for any obscene or immoral purpose; or (k) to interfere with or circumvent the security features of the Service or any related website, other websites, or the Internet. We reserve the right to terminate your use of the Service or any related website for violating any of the prohibited uses.</p>
+                    </dd>
+
+                    <dt id="TOS_Disclaimer_Of_Warranties_Limitation_Of_Liability"><h4>Disclaimer Of Warranties; Limitation Of Liability</h4></dt>
+                    <dd>
+                        <p>We do not guarantee, represent or warrant that your use of our service will be uninterrupted, timely, secure or error-free. We do not warrant that the results that may be obtained from the use of the service will be accurate or reliable.</p>
+                        <p>You agree that from time to time we may remove the service for indefinite periods of time or cancel the service at any time, without notice to you.</p>
+                        <p>You expressly agree that your use of, or inability to use, the service is at your sole risk. The service and all products and services delivered to you through the service are (except as expressly stated by us) provided 'as is' and 'as available' for your use, without any representation, warranties or conditions of any kind, either express or implied, including all implied warranties or conditions of merchantability, merchantable quality, fitness for a particular purpose, durability, title, and non-infringement.</p>
+                        <p>In no case shall awindow, our directors, officers, employees, affiliates, agents, contractors, interns, suppliers, service providers or licensors be liable for any injury, loss, claim, or any direct, indirect, incidental, punitive, special, or consequential damages of any kind, including, without limitation lost profits, lost revenue, lost savings, loss of data, replacement costs, or any similar damages, whether based in contract, tort (including negligence), strict liability or otherwise, arising from your use of any of the service or any products procured using the service, or for any other claim related in any way to your use of the service or any product, including, but not limited to, any errors or omissions in any content, or any loss or damage of any kind incurred as a result of the use of the service or any content (or product) posted, transmitted, or otherwise made available via the service, even if advised of their possibility. Because some states or jurisdictions do not allow the exclusion or the limitation of liability for consequential or incidental damages, in such states or jurisdictions, our liability shall be limited to the maximum extent permitted by law.</p>
+                    </dd>
+
+                    <dt id="TOS_Indemnification"><h4>Indemnification</h4></dt>
+                    <dd>
+                        <p>You agree to indemnify, defend and hold harmless awindow and our parent, subsidiaries, affiliates, partners, officers, directors, agents, contractors, licensors, service providers, subcontractors, suppliers, interns and employees, harmless from any claim or demand, including reasonable attorneys’ fees, made by any third-party due to or arising out of your breach of these Terms of Service or the documents they incorporate by reference, or your violation of any law or the rights of a third-party.</p>
+                    </dd>
+
+                    <dt id="TOS_Severability"><h4>Severability</h4></dt>
+                    <dd>
+                        <p>In the event that any provision of these Terms of Service is determined to be unlawful, void or unenforceable, such provision shall nonetheless be enforceable to the fullest extent permitted by applicable law, and the unenforceable portion shall be deemed to be severed from these Terms of Service, such determination shall not affect the validity and enforceability of any other remaining provisions.</p>
+                    </dd>
+
+                    <dt id="TOS_Termination"><h4>Termination</h4></dt>
+                    <dd>
+                        <p>The obligations and liabilities of the parties incurred prior to the termination date shall survive the termination of this agreement for all purposes.</p>
+                        <p>These Terms of Service are effective unless and until terminated by either you or us. You may terminate these Terms of Service at any time by notifying us that you no longer wish to use our Services, or when you cease using our site.</p>
+                        <p>If in our sole judgment you fail, or we suspect that you have failed, to comply with any term or provision of these Terms of Service, we also may terminate this agreement at any time without notice and you will remain liable for all amounts due up to and including the date of termination; and/or accordingly may deny you access to our Services (or any part thereof).</p>
+                    </dd>
+
+                    <dt id="TOS_Entire_Agreement"><h4>Entire Agreement</h4></dt>
+                    <dd>
+                        <p>The failure of us to exercise or enforce any right or provision of these Terms of Service shall not constitute a waiver of such right or provision.</p>
+                        <p>These Terms of Service and any policies or operating rules posted by us on this site or in respect to The Service constitutes the entire agreement and understanding between you and us and govern your use of the Service, superseding any prior or contemporaneous agreements, communications and proposals, whether oral or written, between you and us (including, but not limited to, any prior versions of the Terms of Service).</p>
+                        <p>Any ambiguities in the interpretation of these Terms of Service shall not be construed against the drafting party.</p>
+                    </dd>
+
+                    <dt id="TOS_Governing_Law"><h4>Governing Law</h4></dt>
+                    <dd>
+                        <p>These Terms of Service and any separate agreements whereby we provide you Services shall be governed by and construed in accordance with the laws of 488 Morgan Avenue Brooklyn NY USA 11222.</p>
+                    </dd>
+
+                    <dt id="TOS_Changes_To_Terms_Of_Service"><h4>Changes To Terms Of Service</h4></dt>
+                    <dd>
+                        <p>You can review the most current version of the Terms of Service at any time at this page.</p>
+                        <p>We reserve the right, at our sole discretion, to update, change or replace any part of these Terms of Service by posting updates and changes to our website. It is your responsibility to check our website periodically for changes. Your continued use of or access to our website or the Service following the posting of any changes to these Terms of Service constitutes acceptance of those changes.</p>
+                    </dd>
+
+                    <dt id="TOS_Contact_Information"><h4>Contact Information</h4></dt>
+                    <dd>
+                        <p>Questions about the Terms of Service should be sent to us at <a href="mailto:info@awindownyc.com">info@awindownyc.com</a>.
+                    </dd>
+                </dl>
+            </dd>
+        </dl>
+    </div>
+</script>
+<!-- /terms template -->
