@@ -374,7 +374,6 @@ table {
 .relative-container {
   position: relative; }
 
-
 /* /partials */
 /* helper styles */
 *, *:before, *:after {
@@ -382,7 +381,6 @@ table {
 
 /* /helper styles */
 /* really simplistic grid system */
-
 .left-content {
   float: left; }
 
@@ -603,7 +601,7 @@ li {
 
 .overlay-container {
   position: absolute;
-  left: 61.45833%;
+  left: 61.4583333333%;
   top: 50%;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
@@ -627,15 +625,12 @@ li {
 .overlay-title {
   margin: 0; }
 
-
 .purchase-price {
   margin-top: 1em;
   margin-bottom: 1em; }
 
 .purchase-details {
   margin-bottom: 1em; }
-
-
 
 .order-link, .more-info-link, .choose-design-btn {
   display: inline-block;
@@ -718,7 +713,6 @@ li {
   float: right;
   margin-top: 2em; }
 
-
 .meta-list {
   text-align: center; }
 
@@ -733,7 +727,7 @@ li {
     .two-by .meta-list-item:nth-child(2n-1) {
       margin-left: 0; }
   .three-by .meta-list-item {
-    width: 31.54945%; }
+    width: 31.5494505495%; }
     .three-by .meta-list-item:nth-child(3) {
       margin-top: 0; }
     .three-by .meta-list-item:nth-child(3n-2) {
@@ -741,7 +735,7 @@ li {
 
 .meta-list-link, .homepage-module-link {
   display: block;
-  padding-bottom: 56.29139%;
+  padding-bottom: 56.2913907285%;
   position: relative;
   border: 1px solid #858587;
   background-size: cover;
@@ -789,7 +783,6 @@ li {
 .collaborator-about-container .meta-list {
   text-align: left; }
 
-
 .form-container, .meta-info-container {
   padding: 2.14286em; }
 
@@ -806,7 +799,7 @@ li {
 .form-container {
   position: relative;
   float: right;
-  width: 61.8034%;
+  width: 61.803398875%;
   padding-bottom: 2.85714em; }
   .form-container > label {
     display: block;
@@ -993,7 +986,6 @@ li {
   .lightbox-close:hover, .modal-close:hover {
     text-decoration: none; }
 
-
 .modal-container {
   height: auto; }
   .contact-modal .modal-container {
@@ -1001,7 +993,6 @@ li {
 
 .modal-content {
   background-color: #fff; }
-
 
 .learn-more-modal .modal-container {
   min-width: 980px;
